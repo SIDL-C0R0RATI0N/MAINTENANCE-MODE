@@ -107,11 +107,6 @@ N'hésitez pas à consulter notre Forum ou notre site internet.
 2. Activez le plugin via le menu 'Plugins' dans WordPress
 3. Accédez à Paramètres -> Mode de maintenance, ou cliquez simplement sur l'indicateur de la barre d'administration pour les paramètres permettant d'activer le mode de maintenance.
 
-## CAPTURE
-
-  ![Screenshot 1]()
-  ![Screenshot 2]()
-
 ## LICENSE
 
 La licence de MAINTENANCE-MODE [GPLv2 or later](https://github.com/SIDL-C0R0RATI0N/MAINTENANCE-MODE/blob/main/LICENSE).
