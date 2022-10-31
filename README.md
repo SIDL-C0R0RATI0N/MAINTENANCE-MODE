@@ -18,8 +18,10 @@
 
 
 
-## LES NOUVEAUTÉS
+## LES NOUVEAUTÉS / CHANGELOG
 
+v0.0.1
+* First release.
 
 
 ## INSTALLATION & UTILISATION
@@ -105,7 +107,7 @@ N'hésitez pas à consulter notre Forum ou notre site internet.
 2. Activez le plugin via le menu 'Plugins' dans WordPress
 3. Accédez à Paramètres -> Mode de maintenance, ou cliquez simplement sur l'indicateur de la barre d'administration pour les paramètres permettant d'activer le mode de maintenance.
 
-### CAPTURE
+## CAPTURE
 
   ![Screenshot 1]()
   ![Screenshot 2]()
