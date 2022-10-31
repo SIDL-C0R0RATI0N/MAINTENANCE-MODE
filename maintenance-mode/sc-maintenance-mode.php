@@ -34,17 +34,18 @@
 
    * @package sc-maintenance-mode
    * @author SIDL CORPORATION
-   * @version 0.0.1
+   * @version 1.0.0
 */
 // define stuff
-define('SCMM_VERSION', '0.0.1');
+define('SCMM_VERSION', '1.0.0');
 define('SCMM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SCMM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SCMM_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('SCMM_PLUGIN_DOMAIN', 'sc-maintenance-mode');
 define('SCMM_VIEW_SITE_CAP', 'scmm_view_site');
 define('SCMM_PLUGIN_CAP', 'scmm_control');
-define('SCMM_SUPPORT_LINK', 'https://forum.sidl-corporation.fr/');
+define('SCMM_SUPPORT_LINK', 'https://forum.sidl-corporation.fr/topic/48-wordpress-plugins-maintenance-mode-additional-plugin-for-wordpress/');
+define('SCMM_RELEASES_LINK', 'https://github.com/SIDL-C0R0RATI0N/MAINTENANCE-MODE/releases');
 
 /**
  * Installation
@@ -200,6 +201,8 @@ class scMaintenanceMode
             background-clip: border-box;
             border: 0 solid rgba(0, 0, 0, .125);
             border-radius: 10px;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 55%);
+            background-color: #00000008;
         }
         hr-sc {
             background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0), #fff, hsla(0, 0%, 100%, 0));
@@ -209,6 +212,86 @@ class scMaintenanceMode
             border: 0;
             opacity: .25;
         }
+        /* ======= AlertBox ======== */
+        .scAlerts {
+            padding: 15px 15px 15px 45px;
+            border-radius: 2px;
+            position: relative;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .scAlerts_error {
+            background: #d70014;
+            color: white;
+            border-radius: 9px;
+        }
+        .scAlerts_warning {
+            background: #ff7600;
+            color: #ffffff;
+            border-radius: 9px;
+        }
+        .scAlerts_success {
+            background: #0e8506;
+            color: #ffffff;
+            border-radius: 9px;
+        }
+        .scAlerts_info, .scAlerts_information {
+            background: #00a1ff;
+            color: white;
+            border-radius: 9px;
+        }
+        .toggle {
+            cursor: pointer;
+            display: inline-block;
+          }
+          
+          .toggle-switch {
+            display: inline-block;
+            background: #ccc;
+            border-radius: 16px;
+            width: 58px;
+            height: 32px;
+            position: relative;
+            vertical-align: middle;
+            transition: background 0.25s;
+          }
+          .toggle-switch:before, .toggle-switch:after {
+            content: "";
+          }
+          .toggle-switch:before {
+            display: block;
+            background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            transition: left 0.25s;
+          }
+          .toggle:hover .toggle-switch:before {
+            background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+          }
+          .toggle-checkbox:checked + .toggle-switch {
+            background: #56c080;
+          }
+          .toggle-checkbox:checked + .toggle-switch:before {
+            left: 30px;
+          }
+          
+          .toggle-checkbox {
+            position: absolute;
+            visibility: hidden;
+          }
+          
+          .toggle-label {
+            margin-left: 5px;
+            position: relative;
+            top: 2px;
+          }
+          
         </style>';
     }
     /**
@@ -242,7 +325,7 @@ class scMaintenanceMode
         <div class="wrap">
             <h2><b><?php _e('Maintenance du site.', SCMM_PLUGIN_DOMAIN); ?></b></h2>
             <p><?php _e('Notre plugin à était éditer pour une amélioration de la page de maintenance, dont avec un style plus adapter, qui inclus le mode sombre ou claire. Notre plugin et totalement français.', SCMM_PLUGIN_DOMAIN); ?></p>
-            <hr class="hr-sc"/>
+            <hr class="hr-sc"/><br/>
             <div class="card-sc">
                 <form method="post" action="options.php">
                     <?php settings_fields('scmm'); ?>
@@ -258,7 +341,12 @@ class scMaintenanceMode
                             </th>
                             <td>
                                 <?php $scmm_enabled = esc_attr(get_option('scmm-enabled')); ?>
-                                <input type="checkbox" id="scmm_enabled" name="scmm-enabled" value="1" <?php checked($scmm_enabled, 1); ?>>
+                                <label class="toggle">
+                                    <input class="toggle-checkbox" type="checkbox" id="scmm_enabled" name="scmm-enabled" value="1" <?php checked($scmm_enabled, 1); ?>>
+                                    <div class="toggle-switch"></div>
+                                </label>
+                                <!--
+                                <input type="checkbox" id="scmm_enabled" name="scmm-enabled" value="1" <?php checked($scmm_enabled, 1); ?>>-->
                                 <?php if ($scmm_enabled) : ?>
                                     <p class="description"><?php echo scmm_get_defaults('scmm_enabled'); ?></p>
                                 <?php endif; ?>
@@ -274,24 +362,28 @@ class scMaintenanceMode
                                 <?php $mode_cs = $scmm_mode == 'cs' ? true : false; ?>
                                 <label>
                                     <input name="scmm-mode" type="radio" value="default" <?php checked($mode_default, 1); ?>>
-                                    <?php _e('Maintenance du site ', SCMM_PLUGIN_DOMAIN); ?> (<?php _e('Default', SCMM_PLUGIN_DOMAIN); ?>)
+                                    <?php _e('Maintenance du site ', SCMM_PLUGIN_DOMAIN); ?> <i>(<?php _e('Default', SCMM_PLUGIN_DOMAIN); ?>)</i>
                                 </label>&nbsp;&nbsp;
                                 <label>
                                     <input name="scmm-mode" type="radio" value="cs" <?php checked($mode_cs, 1); ?>>
                                     <?php _e('Site internet bientôt disponible', SCMM_PLUGIN_DOMAIN); ?>
                                 </label>
                                 <p class="description">
-                                    <?php _e('Si vous mettez votre site en <b>maintenance</b> pendant une période plus longue, vous devez le définir sur <b>"Site internet bientôt disponible"</b>.<br/>Sinon, utilisez le mode <b>"Maintenance en cours"</b>.<br/>', SCMM_PLUGIN_DOMAIN); ?><br />
-                                    <?php _e('La valeur par défaut définit HTTP sur 503, prochainement définira HTTP sur 200.', SCMM_PLUGIN_DOMAIN); ?> <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="blank"><?php _e('En savoir plus.', SCMM_PLUGIN_DOMAIN); ?></a>
+                                    <?php _e('<br/><p class="scAlerts scAlerts_info" style="line-height:18px;">Si vous mettez votre site en <b>maintenance</b> pendant une période plus longue, vous devez le définir sur <b>"Site internet bientôt disponible"</b>.<br/>Sinon, utilisez le mode <b>"Maintenance en cours"</b>.</p>', SCMM_PLUGIN_DOMAIN); ?><br/>
+                                    <?php _e('<i>La valeur par défaut définit HTTP sur 503, prochainement définira HTTP sur 200.</i>', SCMM_PLUGIN_DOMAIN); ?> <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="blank"><?php _e('En savoir plus.', SCMM_PLUGIN_DOMAIN); ?></a>
                                 </p>
                             </td>
                         </tr>
 
                         <tr>
-                            <th>
-                                <a href="<?php echo esc_url(add_query_arg('scmm', 'preview', bloginfo('url'))); ?>" target="_blank" class="button button-secondary"><?php _e('Aperçu', SCMM_PLUGIN_DOMAIN); ?></a>
-                                <a class="button button-secondary support" href="<?php echo SCMM_SUPPORT_LINK ?>" target="_blank"><?php _e('Support', SCMM_PLUGIN_DOMAIN); ?></a>
+                            <th scope="row">
+                                <?php _e('Autres :', SCMM_PLUGIN_DOMAIN); ?>
                             </th>
+                            <td>
+                                <a href="<?php echo esc_url(add_query_arg('scmm', 'preview', bloginfo('url'))); ?>" target="_blank" class="button button-primary"><?php _e('Voir l\'aperçu', SCMM_PLUGIN_DOMAIN); ?></a>
+                                <a class="button button-warning support" href="<?php echo SCMM_SUPPORT_LINK ?>" target="_blank"><?php _e('Support technique', SCMM_PLUGIN_DOMAIN); ?></a>
+                                <a class="button button-secondary" href="<?php echo SCMM_RELEASES_LINK ?>" target="_blank"><?php _e('Releases', SCMM_PLUGIN_DOMAIN); ?></a>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -321,7 +413,11 @@ class scMaintenanceMode
                                 </th>
                                 <td>
                                     <?php $scmm_add_widget_areas = esc_attr(get_option('scmm_add_widget_areas')); ?>
-                                    <input type="checkbox" id="scmm_add_widget_areas" name="scmm_add_widget_areas" value="1" <?php checked($scmm_add_widget_areas, 1); ?>>
+                                    <label class="toggle">
+                                        <input class="toggle-checkbox" type="checkbox" id="scmm_add_widget_areas" name="scmm_add_widget_areas" value="1" <?php checked($scmm_add_widget_areas, 1); ?>>
+                                        <div class="toggle-switch"></div>
+                                    </label>
+                                    <!--<input type="checkbox" id="scmm_add_widget_areas" name="scmm_add_widget_areas" value="1" <?php checked($scmm_add_widget_areas, 1); ?>>-->
                                     <?php if ($scmm_add_widget_areas) : ?>
                                         <p class="description"><?php echo scmm_get_defaults('scmm_add_widget_areas'); ?></p>
                                     <?php endif; ?>
