@@ -1,0 +1,100 @@
+#wp-admin-bar-scmm-indicator.scmm-indicator--enabled {
+    background: rgba(159, 0, 0, 1)
+}
+
+h2,
+h3 {
+    color: #151617;
+    font-size: 1.3em;
+    margin: 1em 0;
+}
+
+
+/**/
+
+.card {
+    position: relative;
+    padding: 5px;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #b6b6b64c;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: 10px;
+}
+
+hr {
+    background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0), #fff, hsla(0, 0%, 100%, 0));
+    background-color: transparent;
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    opacity: .25;
+}
+
+
+/* Tabs */
+
+.tabs.clearfix {
+    margin-bottom: 0;
+}
+
+.tabs li {
+    float: left;
+    width: 20%;
+}
+
+.tabs a {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #2f2f2f;
+    padding: 10px 0;
+    margin: 2px;
+    border-bottom: 2px solid #848484;
+    background: #f7f7f7;
+    display: block;
+}
+
+.tabs a:hover,
+.tabs a.active {
+    background: #818181;
+    color: white;
+    border-bottom: 2px solid #a9a9a9;
+}
+
+.tabs a:focus {
+    box-shadow: none;
+}
+
+#first-tab-group {
+    width: 95%;
+}
+
+.tabgroup div.tab-panel {
+    padding: 20px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 55%);
+    background-color: #00000008;
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    -webkit-backdrop-filter: saturate(200%) blur(30px);
+    backdrop-filter: saturate(200%) blur(30px);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}

@@ -1,0 +1,21 @@
+{
+    "name": "maintenance-mode",
+    "version": "0.0.1",
+    "description": "Plugin Wordpress officiel de système de maintenance.",
+    "main": "sc-maintenance-mode",
+    "scripts": {
+        "open-app": "gulp open-app",
+        "start": "npm run open-app",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "gulp-watch"
+    },
+    "repository": {
+        "type": "web",
+        "url": "https://github.com/SIDL-C0R0RATI0N/MAINTENANCE-MODE"
+    },
+    "keywords": [
+        "SIDL CORPORATION"
+    ],
+    "author": "SIDL CORPORATION <support@sidl-corporation.fr> (https://sidl-corporation.fr/)",
+    "license": "MIT"
+}
