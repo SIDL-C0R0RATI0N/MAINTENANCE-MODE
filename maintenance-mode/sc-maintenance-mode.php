@@ -2,7 +2,7 @@
 /*  +---------------------------------------------------------------------+
     Plugin Name: Système de Maintenance
     Plugin URI: https://github.com/SIDL-C0R0RATI0N/MAINTENANCE-MODE
-    Version: 0.0.1
+    Version: 1.0.1
     Author: SIDL CORPORATION
     Author URI: https://sidl-corporation.fr/
     Description: Vous avez besoins d'une page de maintenance ? Nous avons mise en place notre premier plugins pour vous permettre de mettre votre site en maintenance le temps d'une mise à jour.
@@ -11,7 +11,7 @@
     Requires at least: 4.0
     Tested up to: 6.0.3
     Requires PHP: 5.3
-    Stable tag: 0.1
+    Stable tag: 1.0.1
     License: GPLv2 or later
     License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,10 +34,10 @@
 
    * @package sc-maintenance-mode
    * @author SIDL CORPORATION
-   * @version 1.0.0
+   * @version 1.0.1
 */
 // define stuff
-define('SCMM_VERSION', '1.0.0');
+define('SCMM_VERSION', '1.0.1');
 define('SCMM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SCMM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SCMM_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -191,6 +191,7 @@ class scMaintenanceMode
         #wp-admin-bar-scmm-indicator.scmm-indicator--enabled {
             background: rgba(159, 0, 0, 1)
         }
+        
         .card-sc {
             position: relative;
             padding: 20px;
@@ -204,7 +205,8 @@ class scMaintenanceMode
             box-shadow: 0 3px 10px rgb(0 0 0 / 55%);
             background-color: #00000008;
         }
-        hr-sc {
+        
+        .hr-sc {
             background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0), #fff, hsla(0, 0%, 100%, 0));
             background-color: transparent;
             margin: 1rem 0;
@@ -212,7 +214,10 @@ class scMaintenanceMode
             border: 0;
             opacity: .25;
         }
+        
+        
         /* ======= AlertBox ======== */
+        
         .scAlerts {
             padding: 15px 15px 15px 45px;
             border-radius: 2px;
@@ -220,45 +225,54 @@ class scMaintenanceMode
             margin-bottom: 10px;
             color: #fff;
         }
+        
         .scAlerts_error {
             background: #d70014;
             color: white;
             border-radius: 9px;
         }
+        
         .scAlerts_warning {
             background: #ff7600;
             color: #ffffff;
             border-radius: 9px;
         }
+        
         .scAlerts_success {
             background: #0e8506;
             color: #ffffff;
             border-radius: 9px;
         }
-        .scAlerts_info, .scAlerts_information {
+        
+        .scAlerts_info,
+        .scAlerts_information {
             background: #00a1ff;
             color: white;
             border-radius: 9px;
         }
+        
         .toggle {
             cursor: pointer;
             display: inline-block;
-          }
-          
-          .toggle-switch {
+        }
+        
+        .toggle-switch {
             display: inline-block;
-            background: #ccc;
+            background: rgb(160, 160, 160);
             border-radius: 16px;
             width: 58px;
             height: 32px;
             position: relative;
             vertical-align: middle;
             transition: background 0.25s;
-          }
-          .toggle-switch:before, .toggle-switch:after {
+        }
+        
+        .toggle-switch:before,
+        .toggle-switch:after {
             content: "";
-          }
-          .toggle-switch:before {
+        }
+        
+        .toggle-switch:before {
             display: block;
             background: linear-gradient(to bottom, #fff 0%, #eee 100%);
             border-radius: 50%;
@@ -269,29 +283,31 @@ class scMaintenanceMode
             top: 4px;
             left: 4px;
             transition: left 0.25s;
-          }
-          .toggle:hover .toggle-switch:before {
+        }
+        
+        .toggle:hover .toggle-switch:before {
             background: linear-gradient(to bottom, #fff 0%, #fff 100%);
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
-          }
-          .toggle-checkbox:checked + .toggle-switch {
-            background: #56c080;
-          }
-          .toggle-checkbox:checked + .toggle-switch:before {
+        }
+        
+        .toggle-checkbox:checked+.toggle-switch {
+            background: #056b2e;
+        }
+        
+        .toggle-checkbox:checked+.toggle-switch:before {
             left: 30px;
-          }
-          
-          .toggle-checkbox {
+        }
+        
+        .toggle-checkbox {
             position: absolute;
             visibility: hidden;
-          }
-          
-          .toggle-label {
+        }
+        
+        .toggle-label {
             margin-left: 5px;
             position: relative;
             top: 2px;
-          }
-          
+        }
         </style>';
     }
     /**

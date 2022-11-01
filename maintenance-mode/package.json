@@ -1,6 +1,6 @@
 {
     "name": "maintenance-mode",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Plugin Wordpress officiel de système de maintenance.",
     "main": "sc-maintenance-mode",
     "scripts": {
@@ -17,5 +17,5 @@
         "SIDL CORPORATION"
     ],
     "author": "SIDL CORPORATION <support@sidl-corporation.fr> (https://sidl-corporation.fr/)",
-    "license": "MIT"
+    "license": "GPLv2"
 }

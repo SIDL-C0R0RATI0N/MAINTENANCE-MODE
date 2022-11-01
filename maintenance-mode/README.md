@@ -20,13 +20,9 @@
 
 ## LES NOUVEAUTÉS / CHANGELOG
 
-v1.0.0
-* Appearance Update,
-* Addition of a switch,
-* Plugin security update.
-
-v0.0.1
-* First release.
+v1.0.1
+* Minor bug fix,
+* Fixed version detection.
 
 
 ## INSTALLATION & UTILISATION

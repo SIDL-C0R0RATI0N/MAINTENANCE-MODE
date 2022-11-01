@@ -44,6 +44,10 @@ Do not hesitate to take a look at our Forum or our website.
 1. Navigate to Settings -> Maintenance Mode, or simply click on Admin Bar indicator for settings to enable maintenance mode.
 
 == Changelog ==
+= 1.0.1 =
+* Minor bug fix,
+* Fixed version detection.
+
 = 1.0.0 =
 * Appearance Update,
 * Addition of a switch,
