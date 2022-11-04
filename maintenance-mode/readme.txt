@@ -44,6 +44,15 @@ Do not hesitate to take a look at our Forum or our website.
 1. Navigate to Settings -> Maintenance Mode, or simply click on Admin Bar indicator for settings to enable maintenance mode.
 
 == Changelog ==
+= 2.0.0 =
+* Appearance update,
+* Addition of a button at the top to save quickly,
+* Compatibility with WordPress 6.1,
+* Additions of the WordPress version in bah of the plugin,
+* Changing the appearance of buttons,
+* Update of the "Technical Support" & "Releases" links,
+* Updated name in menu.
+
 = 1.0.1 =
 * Minor bug fix,
 * Fixed version detection.

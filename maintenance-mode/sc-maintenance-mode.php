@@ -1,17 +1,17 @@
 <?php
 /*  +---------------------------------------------------------------------+
     Plugin Name: Système de Maintenance
-    Plugin URI: https://github.com/SIDL-C0R0RATI0N/MAINTENANCE-MODE
-    Version: 1.0.1
+    Plugin URI: https://redirection.sidl-corporation.fr/MAINTENANCE_MODE_PLUGIN
+    Version: 2.0.0
     Author: SIDL CORPORATION
     Author URI: https://sidl-corporation.fr/
     Description: Vous avez besoins d'une page de maintenance ? Nous avons mise en place notre premier plugins pour vous permettre de mettre votre site en maintenance le temps d'une mise à jour.
     Text Domain: sc-maintenance-mode
     Domain Path: /languages/
     Requires at least: 4.0
-    Tested up to: 6.0.3
+    Tested up to: 6.1
     Requires PHP: 5.3
-    Stable tag: 1.0.1
+    Stable tag: 2.0.0
     License: GPLv2 or later
     License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,18 +34,19 @@
 
    * @package sc-maintenance-mode
    * @author SIDL CORPORATION
-   * @version 1.0.1
+   * @version 2.0.0
 */
 // define stuff
-define('SCMM_VERSION', '1.0.1');
+define('SCMM_VERSION', '2.0.0');
+define('SCMM_WP_VERSION', '6.1');
 define('SCMM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('SCMM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SCMM_PLUGIN_BASENAME', plugin_basename(__FILE__));
 define('SCMM_PLUGIN_DOMAIN', 'sc-maintenance-mode');
 define('SCMM_VIEW_SITE_CAP', 'scmm_view_site');
 define('SCMM_PLUGIN_CAP', 'scmm_control');
-define('SCMM_SUPPORT_LINK', 'https://forum.sidl-corporation.fr/topic/48-wordpress-plugins-maintenance-mode-additional-plugin-for-wordpress/');
-define('SCMM_RELEASES_LINK', 'https://github.com/SIDL-C0R0RATI0N/MAINTENANCE-MODE/releases');
+define('SCMM_SUPPORT_LINK', 'https://redirection.sidl-corporation.fr/plugin_maintenance_mode_wp');
+define('SCMM_RELEASES_LINK', 'https://redirection.sidl-corporation.fr/maintenance_mode_releases');
 
 /**
  * Installation
@@ -71,7 +72,7 @@ function scmm_get_defaults($type)
 {
     switch ($type) {
         case 'maintenance_message':
-            $default = __("<h1>Site en maintenance</h1><p>Notre site Web fait actuellement l'objet d'une maintenance planifiée. Veuillez revenir bientôt.</p>", SCMM_PLUGIN_DOMAIN);
+            $default = __("<h1>SITE EN MAINTENANCE</h1><p>Notre site Web fait actuellement l'objet d'une maintenance planifiée. Veuillez revenir bientôt.</p>", SCMM_PLUGIN_DOMAIN);
             break;
         case 'warning_wp_super_cache':
             $default = __("Important : n'oubliez pas de vider votre cache à l'aide de WP Super Cache lors de l'activation ou de la désactivation du mode maintenance.", SCMM_PLUGIN_DOMAIN);
@@ -176,7 +177,7 @@ class scMaintenanceMode
     */
     public function ui()
     {
-        add_submenu_page('options-general.php', __('Maintenance', SCMM_PLUGIN_DOMAIN), __('Maintenance', SCMM_PLUGIN_DOMAIN), $this->get_relevant_cap(), 'sc-maintenance-mode', array($this, 'settingsPage'));
+        add_submenu_page('options-general.php', __('Maintenance du site', SCMM_PLUGIN_DOMAIN), __('Maintenance du site', SCMM_PLUGIN_DOMAIN), $this->get_relevant_cap(), 'sc-maintenance-mode', array($this, 'settingsPage'));
     }
 
     /**
@@ -291,7 +292,7 @@ class scMaintenanceMode
         }
         
         .toggle-checkbox:checked+.toggle-switch {
-            background: #056b2e;
+            background: #16994b;
         }
         
         .toggle-checkbox:checked+.toggle-switch:before {
@@ -307,6 +308,34 @@ class scMaintenanceMode
             margin-left: 5px;
             position: relative;
             top: 2px;
+        }
+        /* WP ORDPRESS CUSTOM */
+
+        wp-core-ui .button,
+        .wp-core-ui .button-primary,
+        .wp-core-ui .button-secondary,
+        #insert-media-button {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 13px;
+            line-height: 2.15384615;
+            min-height: 30px;
+            margin: 0;
+            padding: 0 10px;
+            cursor: pointer;
+            border-width: 1px;
+            border-style: solid;
+            -webkit-appearance: none;
+            border-radius: 10px;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+        #wp-scmm-content-editor-container {
+            border-radius: 5px;
+        }
+        .notice-success, div.updated {
+            border-left-color: #00a32a;
+            border-radius: 10px;
         }
         </style>';
     }
@@ -341,7 +370,7 @@ class scMaintenanceMode
         <div class="wrap">
             <h2><b><?php _e('Maintenance du site.', SCMM_PLUGIN_DOMAIN); ?></b></h2>
             <p><?php _e('Notre plugin à était éditer pour une amélioration de la page de maintenance, dont avec un style plus adapter, qui inclus le mode sombre ou claire. Notre plugin et totalement français.', SCMM_PLUGIN_DOMAIN); ?></p>
-            <hr class="hr-sc"/><br/>
+            <hr/><br/>
             <div class="card-sc">
                 <form method="post" action="options.php">
                     <?php settings_fields('scmm'); ?>
@@ -396,8 +425,9 @@ class scMaintenanceMode
                                 <?php _e('Autres :', SCMM_PLUGIN_DOMAIN); ?>
                             </th>
                             <td>
+                                <?php submit_button(); ?>
                                 <a href="<?php echo esc_url(add_query_arg('scmm', 'preview', bloginfo('url'))); ?>" target="_blank" class="button button-primary"><?php _e('Voir l\'aperçu', SCMM_PLUGIN_DOMAIN); ?></a>
-                                <a class="button button-warning support" href="<?php echo SCMM_SUPPORT_LINK ?>" target="_blank"><?php _e('Support technique', SCMM_PLUGIN_DOMAIN); ?></a>
+                                <a class="button button-secondary" href="<?php echo SCMM_SUPPORT_LINK ?>" target="_blank"><?php _e('Support technique', SCMM_PLUGIN_DOMAIN); ?></a>
                                 <a class="button button-secondary" href="<?php echo SCMM_RELEASES_LINK ?>" target="_blank"><?php _e('Releases', SCMM_PLUGIN_DOMAIN); ?></a>
                             </td>
                         </tr>
@@ -495,7 +525,7 @@ class scMaintenanceMode
                                             <input type="checkbox" id="scmm_analytify" name="scmm_analytify" value="1" <?php checked($scmm_analytify, 1); ?>>
                                             <?php echo sprintf(__('for Analytics profile <b>%s</b> (<a href="/wp-admin/admin.php?page=analytify-settings">configured in Analytify</a>)', SCMM_PLUGIN_DOMAIN), $ua_code); ?>
                                             <p class="description">
-<?php _e('Since you have the Analytify plugin installed, this will add Google Analytics tracking code to the maintenance page.', SCMM_PLUGIN_DOMAIN); ?>
+                                            <?php _e('Since you have the Analytify plugin installed, this will add Google Analytics tracking code to the maintenance page.', SCMM_PLUGIN_DOMAIN); ?>
                                             </p>
                                         </td>
                                     </tr>
@@ -540,7 +570,10 @@ class scMaintenanceMode
 
                     <?php submit_button(); ?>
                 </form>
-                <?php echo 'Version : '.SCMM_VERSION;?>
+                <?php 
+                    echo 'Version plugin : '.SCMM_VERSION.'<br/>';
+                    echo 'Version WordPress : '.SCMM_WP_VERSION;
+                ?>
             </div>
         </div>
         <script>

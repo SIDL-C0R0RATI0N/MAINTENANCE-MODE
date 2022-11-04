@@ -20,9 +20,14 @@
 
 ## LES NOUVEAUTÉS / CHANGELOG
 
-v1.0.1
-* Minor bug fix,
-* Fixed version detection.
+v2.0.0
+* Appearance update,
+* Addition of a button at the top to save quickly,
+* Compatibility with WordPress 6.1,
+* Additions of the WordPress version in bah of the plugin,
+* Changing the appearance of buttons,
+* Update of the "Technical Support" & "Releases" links,
+* Updated name in menu.
 
 
 ## INSTALLATION & UTILISATION
@@ -30,7 +35,7 @@ v1.0.1
   * PHP: >= 5.6
   * WebServer: Apache or Nginx
   * Database: MySQL
-  * Wordpress: 6.0
+  * Wordpress: 6.1
 
 ## DESCRIPTION
 

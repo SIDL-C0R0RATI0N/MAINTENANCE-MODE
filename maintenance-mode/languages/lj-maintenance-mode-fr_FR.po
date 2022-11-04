@@ -21,7 +21,7 @@ msgid ""
 "<h1>Website Under Maintenance</h1><p>Our Website is currently undergoing "
 "scheduled maintenance. Please check back soon.</p>"
 msgstr ""
-"<h1>Site En Maintenance</h1><p>Notre site est actuellement en maintenance, "
+"<h1>SITE EN MAINTENANCE</h1><p>Notre site est actuellement en maintenance, "
 "merci de patienter.</p>"
 
 #: lj-maintenance-mode.php:69
